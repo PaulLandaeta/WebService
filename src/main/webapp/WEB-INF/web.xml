@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.0">
+    <!--RestEasy -->
+
+    <context-param>
+        <param-name>javax.ws.rs.core.Application</param-name>
+        <param-value>com.tierconnect.resteasy.XivelyApp</param-value>
+    </context-param>
+
+    <!--<context-param>
+        <param-name>resteasy.scan</param-name>
+        <param-value>true</param-value>
+    </context-param>-->
+
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/api</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    <!--RestEasy End-->
+
+
+    <!--Swagger-->
+
+    <context-param>
+        <param-name>resteasy.resources</param-name>
+        <param-value>com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>resteasy.providers</param-name>
+        <param-value>
+            com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider
+            ,com.wordnik.swagger.jaxrs.listing.ResourceListingProvider
+        </param-value>
+    </context-param>
+
+    <session-config>
+        <session-timeout>-1</session-timeout>
+    </session-config>
+
+    <servlet>
+        <servlet-name>DefaultJaxrsConfig</servlet-name>
+        <servlet-class>com.wordnik.swagger.jaxrs.config.DefaultJaxrsConfig</servlet-class>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.0.0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>/xively/api</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <!--Swagger End-->
+
+    <!-- CORS -->
+    <filter>
+        <filter-name>CORS</filter-name>
+        <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+
+        <init-param>
+            <param-name>cors.allowOrigin</param-name>
+            <param-value>*</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>cors.supportedMethods</param-name>
+            <param-value>GET, POST, HEAD, PATCH, PUT, DELETE, OPTIONS</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CORS</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- CORS End -->
+
+
+
+</web-app>
+        <!--<?xml version="1.0" encoding="UTF-8"?>-->
+        <!--<web-app id="WebApp_ID" version="2.4"-->
+        <!--xmlns="http://java.sun.com/xml/ns/j2ee"-->
+        <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+        <!--xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee-->
+        <!--http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">-->
+        <!--<display-name>first steps servlet</display-name>-->
+
+        <!--&lt;!&ndash; Restlet adapter &ndash;&gt;-->
+        <!--<servlet>-->
+        <!--<servlet-name>RestletServlet</servlet-name>-->
+        <!--<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>-->
+        <!--<init-param>-->
+        <!--&lt;!&ndash; Application class name &ndash;&gt;-->
+        <!--<param-name>org.restlet.application</param-name>-->
+        <!--<param-value>com.tierconnect.webservices.WebApiTutorial</param-value>-->
+        <!--</init-param>-->
+        <!--</servlet>-->
+
+        <!--&lt;!&ndash; Catch all requests &ndash;&gt;-->
+        <!--<servlet-mapping>-->
+        <!--<servlet-name>RestletServlet</servlet-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+        <!--</servlet-mapping>-->
+        <!--</web-app>-->
